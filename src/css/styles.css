@@ -237,14 +237,13 @@ body {
   text-align: center;
   margin: 20px 0;
   display: none;
-  font-family: 'Montserrat', sans-serif;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.04em;
 }
 
 .loading-text {
   font-weight: 500;
-}
-
-.loading-more-text {
-  margin-top: 16px;
-  font-style: italic;
 }
