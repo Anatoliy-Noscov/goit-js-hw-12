@@ -81,19 +81,6 @@ body {
   background-color: var(--hover-blue);
 }
 
-.loader {
-  width: 125px;
-  height: 40px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--primary-blue);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  display: none;
-  margin: 20px auto;
-  border-radius: 8px;
-  padding: 8px 16px;
-}
-
 .loader.visible {
   display: block;
 }

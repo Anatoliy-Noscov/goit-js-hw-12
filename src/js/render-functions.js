@@ -4,7 +4,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const galleryContainer = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 const endMessage = document.querySelector('.end-message');
-const loader = document.querySelector('.loader');
 
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -44,6 +43,17 @@ export function createGallery(images) {
 
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
+
+  if (images.length > 0) {
+    const card = document.querySelector('.gallery-item');
+    if (card) {
+      const cardHeight = card.getBoundingClientRect().height;
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+      });
+    }
+  }
 }
 
 export function clearGallery() {
@@ -51,11 +61,13 @@ export function clearGallery() {
 }
 
 export function showLoader() {
-  loader.classList.add('visible');
+  const loader = document.querySelector('.loading-text');
+  if (loader) loader.style.display = 'block';
 }
 
 export function hideLoader() {
-  loader.classList.remove('visible');
+  const loader = document.querySelector('.loading-text');
+  if (loader) loader.style.display = 'none';
 }
 
 export function showLoadMoreButton() {
@@ -67,13 +79,9 @@ export function hideLoadMoreButton() {
   loadMoreBtn.style.display = 'none';
 }
 
-export function showEndMessage() {
-  endMessage.textContent =
-    "We're sorry, but you've reached the end of search results.";
+export function showEndMessage(
+  message = "We're sorry, but you've reached the end of search results."
+) {
+  endMessage.textContent = message;
   endMessage.style.display = 'block';
-}
-
-function hideEndMessage() {
-  const endMsg = document.querySelector('.end-message');
-  if (endMsg) endMsg.style.display = 'none';
 }

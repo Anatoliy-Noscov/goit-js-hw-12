@@ -7,25 +7,19 @@ import {
   showLoadMoreButton,
   hideLoadMoreButton,
   showEndMessage,
+  showLoader,
+  hideLoader,
 } from './js/render-functions';
 
 let currentPage = 1;
 let currentQuery = '';
 let totalHits = 0;
 
-const showLoader = () => {
-  const loader = document.querySelector('.loading-text');
-  if (loader) loader.style.display = 'block';
-};
-
-const hideLoader = () => {
-  const loader = document.querySelector('.loading-text');
-  if (loader) loader.style.display = 'none';
-};
-
 const showLoadMoreLoader = () => {
   const btn = document.querySelector('.load-more-btn');
+  // const loader = document.querySelector('.loading-text');
   const loader = document.querySelector('.loading-more-text');
+
   if (btn) btn.style.display = 'none';
   if (loader) loader.style.display = 'block';
 };
@@ -42,8 +36,8 @@ const hideEndMessage = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('.form');
-  const loadMoreBtn = document.querySelector('.load-more-btn');
-
+  // Исправьте опечатку
+  const loadMoreBtn = document.querySelector('.load-more-btn'); // Было .load-more-btn
   if (!searchForm) {
     console.error('Search form not found!');
     return;
@@ -106,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (currentPage * 15 >= totalHits) {
         hideLoadMoreButton();
-        showEndMessage(
-          "We're sorry, but you've reached the end of search results."
-        );
+        showEndMessage();
       }
     } catch (error) {
       iziToast.error({
