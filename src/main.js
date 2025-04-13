@@ -17,7 +17,6 @@ let totalHits = 0;
 
 const showLoadMoreLoader = () => {
   const btn = document.querySelector('.load-more-btn');
-  // const loader = document.querySelector('.loading-text');
   const loader = document.querySelector('.loading-more-text');
 
   if (btn) btn.style.display = 'none';
@@ -36,8 +35,7 @@ const hideEndMessage = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('.form');
-  // Исправьте опечатку
-  const loadMoreBtn = document.querySelector('.load-more-btn'); // Было .load-more-btn
+  const loadMoreBtn = document.querySelector('.load-more-btn');
   if (!searchForm) {
     console.error('Search form not found!');
     return;
