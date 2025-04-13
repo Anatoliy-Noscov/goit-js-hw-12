@@ -71,9 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
           message: 'Sorry, no images found. Please try another query!',
           position: 'topRight',
         });
+        hideLoadMoreButton();
       } else {
         createGallery(data.hits);
-        if (data.totalHits > 15) {
+        if (data.totalHits > 15 && data.hits.length === 15) {
           showLoadMoreButton();
         }
       }
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await getImagesByQuery(currentQuery, currentPage);
       createGallery(data.hits);
 
-      if (currentPage * 15 >= totalHits) {
+      if (data.hits.length < 15 || currentPage * 15 >= totalHits) {
         hideLoadMoreButton();
         showEndMessage();
       }
