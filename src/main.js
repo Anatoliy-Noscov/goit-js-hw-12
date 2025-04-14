@@ -1,6 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import { getImagesByQuery } from './js/pixabay-api';
+import { getImagesByQuery, PER_PAGE } from './js/pixabay-api';
 import {
   createGallery,
   clearGallery,
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideLoadMoreButton();
       } else {
         createGallery(data.hits, false);
-        if (data.totalHits > 15 && data.hits.length === 15) {
+        if (data.totalHits > data.hits.length) {
           showLoadMoreButton();
         }
       }
@@ -97,12 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await getImagesByQuery(currentQuery, currentPage);
       createGallery(data.hits, true);
 
-      const isEndCollection =
-        data.hits.length < 15 || currentPage * 15 >= totalHits;
+      const isEndCollection = currentPage * PER_PAGE >= totalHits;
 
       if (isEndCollection) {
         hideLoadMoreButton();
         showEndMessage();
+      } else {
+        showLoadMoreButton();
       }
     } catch (error) {
       iziToast.error({

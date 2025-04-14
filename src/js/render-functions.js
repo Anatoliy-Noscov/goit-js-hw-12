@@ -72,8 +72,11 @@ export function hideLoader() {
 }
 
 export function showLoadMoreButton() {
-  loadMoreBtn.style.display = 'block';
-  endMessage.style.display = 'none';
+  const loadMoreBtn = document.querySelector('.load-more-btn');
+  const endMessage = document.querySelector('.end-message');
+
+  if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+  if (endMessage) endMessage.style.display = 'none';
 }
 
 export function hideLoadMoreButton() {
