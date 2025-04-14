@@ -11,7 +11,7 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-export function createGallery(images) {
+export function createGallery(images, shouldScroll = false) {
   const markup = images
     .map(
       image => `
@@ -45,7 +45,7 @@ export function createGallery(images) {
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 
-  if (images.length > 0) {
+  if (shouldScroll && images.length > 0) {
     const card = document.querySelector('.gallery-item');
     if (card) {
       const cardHeight = card.getBoundingClientRect().height;

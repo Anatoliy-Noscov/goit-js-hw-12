@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         hideLoadMoreButton();
       } else {
-        createGallery(data.hits);
+        createGallery(data.hits, false);
         if (data.totalHits > 15 && data.hits.length === 15) {
           showLoadMoreButton();
         }
@@ -95,9 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const data = await getImagesByQuery(currentQuery, currentPage);
-      createGallery(data.hits);
+      createGallery(data.hits, true);
 
-      if (data.hits.length < 15 || currentPage * 15 >= totalHits) {
+      const isEndCollection =
+        data.hits.length < 15 || currentPage * 15 >= totalHits;
+
+      if (isEndCollection) {
         hideLoadMoreButton();
         showEndMessage();
       }
